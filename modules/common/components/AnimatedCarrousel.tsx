@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Animated, Dimensions, FlatList, ListRenderItemInfo } from 'react-native';
+import { Animated, Dimensions, ListRenderItemInfo } from 'react-native';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -19,8 +19,8 @@ export const AnimatedCarousel = <T,>({ data, renderCard, itemWidth }: Props<T>) 
   const SPACER_WIDTH = (SCREEN_WIDTH - itemWidth) / 2;
 
   return (
-    <FlatList
-      data={data}
+    <Animated.FlatList
+      data={data as Animated.WithAnimatedObject<ArrayLike<T>> | null | undefined}
       keyExtractor={(_, i) => i.toString()}
       horizontal
       showsHorizontalScrollIndicator={false}
@@ -33,7 +33,7 @@ export const AnimatedCarousel = <T,>({ data, renderCard, itemWidth }: Props<T>) 
         alignItems: 'center',
       }}
       onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
-        useNativeDriver: false,
+        useNativeDriver: true,
       })}
       renderItem={({ item, index }: ListRenderItemInfo<T>) =>
         renderCard({ item, index, scrollX, itemWidth })

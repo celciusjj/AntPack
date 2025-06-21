@@ -54,11 +54,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderRadius: 16,
     overflow: 'hidden',
-    backgroundColor: 'transparency',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    backgroundColor: 'transparent',
     justifyContent: 'flex-end',
   },
   imageWrapper: {
