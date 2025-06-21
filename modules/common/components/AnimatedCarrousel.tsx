@@ -7,11 +7,11 @@ import {
 } from "react-native";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
-const ITEM_WIDTH = SCREEN_WIDTH / 2.5;
-const SPACER_WIDTH = (SCREEN_WIDTH - ITEM_WIDTH) / 2;
+
 
 interface Props<T> {
   data: T[];
+  itemWidth: number;
   renderCard: (params: {
     item: T;
     index: number;
@@ -20,8 +20,9 @@ interface Props<T> {
   }) => React.ReactElement;
 }
 
-export const AnimatedCarousel = <T,>({ data, renderCard }: Props<T>) => {
+export const AnimatedCarousel = <T,>({ data, renderCard, itemWidth }: Props<T>) => {
   const scrollX = useRef(new Animated.Value(0)).current;
+  const SPACER_WIDTH = (SCREEN_WIDTH - itemWidth) / 2;
 
   return (
     <FlatList
@@ -29,7 +30,7 @@ export const AnimatedCarousel = <T,>({ data, renderCard }: Props<T>) => {
       keyExtractor={(_, i) => i.toString()}
       horizontal
       showsHorizontalScrollIndicator={false}
-      snapToInterval={ITEM_WIDTH + 20}
+      snapToInterval={itemWidth + 20}
       decelerationRate="fast"
       bounces={false}
       scrollEventThrottle={16}
@@ -42,7 +43,7 @@ export const AnimatedCarousel = <T,>({ data, renderCard }: Props<T>) => {
         { useNativeDriver: false }
       )}
       renderItem={({ item, index }: ListRenderItemInfo<T>) =>
-        renderCard({ item, index, scrollX, itemWidth: ITEM_WIDTH })
+        renderCard({ item, index, scrollX, itemWidth })
       }
     />
   );

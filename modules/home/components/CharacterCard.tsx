@@ -1,19 +1,18 @@
 import React from "react";
-import { Animated, Dimensions, Image, StyleSheet, View } from "react-native";
+import { Animated, Image, StyleSheet, View } from "react-native";
 import { Character } from "../models";
 import { CharacterCardFooter } from "./CharacterCardFooter";
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
-const ITEM_WIDTH = SCREEN_WIDTH / 2.5;
 
 type Props = {
   character: Character;
   index: number;
   scrollX: Animated.Value;
+  itemWidth: number;
 };
 
-export const CharacterCard = ({ character, index, scrollX }: Props) => {
-  const TOTAL_ITEM_WIDTH = ITEM_WIDTH + 20;
+export const CharacterCard = ({ character, index, scrollX, itemWidth }: Props) => {
+  const TOTAL_ITEM_WIDTH = itemWidth + 20;
 
   const inputRange = [
     (index - 1) * TOTAL_ITEM_WIDTH,
@@ -34,7 +33,7 @@ export const CharacterCard = ({ character, index, scrollX }: Props) => {
   });
 
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, {width: itemWidth}]}>
       <Animated.View
         style={[
           styles.imageWrapper,
@@ -57,12 +56,12 @@ export const CharacterCard = ({ character, index, scrollX }: Props) => {
 
 const styles = StyleSheet.create({
   card: {
-    width: ITEM_WIDTH,
+
     height: 260,
     marginHorizontal: 10,
     borderRadius: 16,
     overflow: "hidden",
-    backgroundColor: "#eee",
+    backgroundColor: "transparency",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,

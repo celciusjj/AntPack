@@ -1,6 +1,8 @@
+import { getData, Keys } from "@/store";
 import { Character, CharacterDTO } from "../models";
 
-export const characterAdapter = (response: CharacterDTO[]) => {
+export const characterAdapter = async (response: CharacterDTO[]) => {
+  const favorites = (await getData<number[]>(Keys.FAVORITE)) || [];
   const adapted: Character[] = response?.map((character) => {
     return {
       id: character.id,
@@ -10,7 +12,7 @@ export const characterAdapter = (response: CharacterDTO[]) => {
       status: character.status,
       type: character.type,
       image: character.image,
-      isFavorite: false,
+      isFavorite: favorites.includes(character.id),
     };
   });
 
