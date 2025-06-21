@@ -34,7 +34,7 @@ npx expo start
 ## 📱 Run on Android (APK)
 
 Download the APK following the next link:
-➡️ [Download APK]()
+➡️ [Download APK](https://expo.dev/accounts/celcius/projects/AntPack/builds/3ba69d42-a74e-437f-8418-a769a15f7db9)
 
 Or, if you want to generate a sharable APK (without publishing to the Play Store), run the following command:
 
