@@ -1,4 +1,4 @@
-import { CharacterGender, CharacterStatus } from "./api";
+import { CharacterGender, CharacterStatus } from './api';
 
 export interface Character {
   id: number;

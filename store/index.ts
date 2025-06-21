@@ -1,7 +1,7 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export enum Keys {
-  FAVORITE = "@favorites",
+  FAVORITE = '@favorites',
 }
 
 export async function saveData<T>(key: Keys, value: T) {
@@ -26,6 +26,6 @@ export async function removeData(key: Keys) {
   try {
     AsyncStorage.removeItem(key);
   } catch (e) {
-    throw new Error("Error: " + e);
+    throw new Error('Error: ' + e);
   }
 }

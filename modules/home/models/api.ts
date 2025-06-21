@@ -20,14 +20,14 @@ export interface CharacterDTO {
 }
 
 export enum CharacterStatus {
-  Alive = "Alive",
-  Dead = "Dead",
-  Unknown = "unknown",
+  Alive = 'Alive',
+  Dead = 'Dead',
+  Unknown = 'unknown',
 }
 
 export enum CharacterGender {
-  Female = "Female",
-  Male = "Male",
-  Genderless = "Genderless",
-  Unknown = "unknown",
+  Female = 'Female',
+  Male = 'Male',
+  Genderless = 'Genderless',
+  Unknown = 'unknown',
 }

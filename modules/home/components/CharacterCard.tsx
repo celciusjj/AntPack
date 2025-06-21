@@ -1,8 +1,7 @@
-import React from "react";
-import { Animated, Image, StyleSheet, View } from "react-native";
-import { Character } from "../models";
-import { CharacterCardFooter } from "./CharacterCardFooter";
-
+import React from 'react';
+import { Animated, Image, StyleSheet, View } from 'react-native';
+import { Character } from '../models';
+import { CharacterCardFooter } from './CharacterCardFooter';
 
 type Props = {
   character: Character;
@@ -23,17 +22,17 @@ export const CharacterCard = ({ character, index, scrollX, itemWidth }: Props) =
   const scale = scrollX.interpolate({
     inputRange,
     outputRange: [0.7, 1.2, 0.7],
-    extrapolate: "clamp",
+    extrapolate: 'clamp',
   });
 
   const opacity = scrollX.interpolate({
     inputRange,
     outputRange: [0.3, 1, 0.3],
-    extrapolate: "clamp",
+    extrapolate: 'clamp',
   });
 
   return (
-    <View style={[styles.card, {width: itemWidth}]}>
+    <View style={[styles.card, { width: itemWidth }]}>
       <Animated.View
         style={[
           styles.imageWrapper,
@@ -41,13 +40,8 @@ export const CharacterCard = ({ character, index, scrollX, itemWidth }: Props) =
             transform: [{ scale }],
             opacity,
           },
-        ]}
-      >
-        <Image
-          source={{ uri: character.image }}
-          style={styles.image}
-          resizeMode="cover"
-        />
+        ]}>
+        <Image source={{ uri: character.image }} style={styles.image} resizeMode="cover" />
       </Animated.View>
       <CharacterCardFooter character={character} />
     </View>
@@ -56,24 +50,23 @@ export const CharacterCard = ({ character, index, scrollX, itemWidth }: Props) =
 
 const styles = StyleSheet.create({
   card: {
-
     height: 260,
     marginHorizontal: 10,
     borderRadius: 16,
-    overflow: "hidden",
-    backgroundColor: "transparency",
-    shadowColor: "#000",
+    overflow: 'hidden',
+    backgroundColor: 'transparency',
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
   },
   imageWrapper: {
     ...StyleSheet.absoluteFillObject,
     zIndex: 0,
   },
   image: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
 });

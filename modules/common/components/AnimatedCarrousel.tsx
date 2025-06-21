@@ -1,13 +1,7 @@
-import React, { useRef } from "react";
-import {
-  Animated,
-  Dimensions,
-  FlatList,
-  ListRenderItemInfo,
-} from "react-native";
+import React, { useRef } from 'react';
+import { Animated, Dimensions, FlatList, ListRenderItemInfo } from 'react-native';
 
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
-
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface Props<T> {
   data: T[];
@@ -36,12 +30,11 @@ export const AnimatedCarousel = <T,>({ data, renderCard, itemWidth }: Props<T>) 
       scrollEventThrottle={16}
       contentContainerStyle={{
         paddingHorizontal: SPACER_WIDTH,
-        alignItems: "center",
+        alignItems: 'center',
       }}
-      onScroll={Animated.event(
-        [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-        { useNativeDriver: false }
-      )}
+      onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
+        useNativeDriver: false,
+      })}
       renderItem={({ item, index }: ListRenderItemInfo<T>) =>
         renderCard({ item, index, scrollX, itemWidth })
       }
