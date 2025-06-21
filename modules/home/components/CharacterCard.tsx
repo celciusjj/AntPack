@@ -33,12 +33,7 @@ export const CharacterCard = ({ character, index, scrollX, itemWidth }: Props) =
   return (
     <View style={[styles.card, { width: itemWidth }]}>
       <Animated.View style={[styles.imageWrapper, animatedStyle]}>
-        <Animated.Image
-          sharedTransitionTag="tag"
-          source={{ uri: character.image }}
-          style={styles.image}
-          resizeMode="cover"
-        />
+        <Animated.Image source={{ uri: character.image }} style={styles.image} resizeMode="cover" />
       </Animated.View>
       <CharacterCardFooter character={character} />
     </View>

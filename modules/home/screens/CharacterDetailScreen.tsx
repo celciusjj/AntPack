@@ -3,19 +3,21 @@ import { useNavigation } from 'expo-router';
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useCharacterDetail } from '../hooks/useCharacterDetail';
 import { useCharacterContext } from '../provider/CharacterProvider';
 
 export const CharacterDetailScreen = () => {
   const {
     character: { name, image, gender, species, status, isFavorite },
   } = useCharacterContext();
+  const { animatedImageStyle } = useCharacterDetail();
 
   const { goBack } = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
-        <Animated.Image source={{ uri: image }} style={styles.image} sharedTransitionTag="tag" />
+        <Animated.Image source={{ uri: image }} style={[styles.image, animatedImageStyle]} />
 
         <Text style={styles.name}>
           {name} {showFavoriteIcon(isFavorite)}
@@ -40,7 +42,7 @@ export const CharacterDetailScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff', // blanco
+    backgroundColor: '#fff',
   },
   content: {
     padding: 20,
