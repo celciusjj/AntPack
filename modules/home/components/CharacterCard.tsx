@@ -1,12 +1,13 @@
 import React from 'react';
-import { Animated, Image, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Animated, { Extrapolation, interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import { Character } from '../models';
 import { CharacterCardFooter } from './CharacterCardFooter';
 
 type Props = {
   character: Character;
   index: number;
-  scrollX: Animated.Value;
+  scrollX: Animated.SharedValue<number>;
   itemWidth: number;
 };
 
@@ -19,29 +20,25 @@ export const CharacterCard = ({ character, index, scrollX, itemWidth }: Props) =
     (index + 1) * TOTAL_ITEM_WIDTH,
   ];
 
-  const scale = scrollX.interpolate({
-    inputRange,
-    outputRange: [0.7, 1.2, 0.7],
-    extrapolate: 'clamp',
-  });
+  const animatedStyle = useAnimatedStyle(() => {
+    const scale = interpolate(scrollX.value, inputRange, [0.7, 1.2, 0.7], Extrapolation.CLAMP);
+    const opacity = interpolate(scrollX.value, inputRange, [0.3, 1, 0.3], Extrapolation.CLAMP);
 
-  const opacity = scrollX.interpolate({
-    inputRange,
-    outputRange: [0.3, 1, 0.3],
-    extrapolate: 'clamp',
-  });
+    return {
+      transform: [{ scale }],
+      opacity,
+    };
+  }, [scrollX]);
 
   return (
     <View style={[styles.card, { width: itemWidth }]}>
-      <Animated.View
-        style={[
-          styles.imageWrapper,
-          {
-            transform: [{ scale }],
-            opacity,
-          },
-        ]}>
-        <Image source={{ uri: character.image }} style={styles.image} resizeMode="cover" />
+      <Animated.View style={[styles.imageWrapper, animatedStyle]}>
+        <Animated.Image
+          sharedTransitionTag="tag"
+          source={{ uri: character.image }}
+          style={styles.image}
+          resizeMode="cover"
+        />
       </Animated.View>
       <CharacterCardFooter character={character} />
     </View>

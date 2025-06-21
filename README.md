@@ -65,8 +65,9 @@ eas build --platform ios --profile preview
 - Employs the Adapter Pattern to decouple external DTOs from internal entities, enhancing modularity and reusability.
 - Smooth animation when the screen changes.
 - Context for state managment, passing the data trought the screens.
+- Project configured for deploy to multiple platforms.
 
-## 📂 Project Structure
+## 📂 Project Structure And Architecture
 
 The project’s folder structure follows a modular and well-organized approach, making the codebase easier to develop, maintain, and scale.
 
@@ -79,6 +80,31 @@ Its architecture is inspired by three main paradigms:
 While the project is not a strict implementation of Clean Architecture, it embraces its most important principle: separation of concerns. Concepts like adapters are applied to decouple external data structures (DTOs) from the application's internal entities, ensuring better maintainability and flexibility.
 
 The logic was abstracted into custom hooks, serving as facades and entry points for component behavior. Additionally, the render prop pattern was implemented to keep the animated list component agnostic of its content. This approach enhances extensibility and promotes a clean separation between logic and presentation.
+
+```
+AntPack/
+├── app/                # Core application using expo-router based on Next.js
+├── modules/            # Main feature modules
+│   ├── characters/         # Characters specific logic
+│   │   ├── components/ # Reusable UI components for the characters module
+│   │   ├── adapters/   # Data adapters and interface bridges
+│   │   ├── hooks/      # Custom React hooks for character feature
+│   │   ├── models/     # Data models for characters
+│   │   └── screens/    # Screens specific to the character module
+│   ├── common/         # Shared, reusable features across the app
+│       ├── components/ # Reusable UI components for common use
+│       ├── models/ # Reusable models
+├── services/           # Global services for API communication and business logic
+├── assets/             # Images, fonts, and other static assets
+├── .env                # Environment variables for API configuration
+└── package.json        # Project dependencies and scripts
+```
+
+## TODO (The time was over):
+
+- Feature: Implement infinite scroll
+- Bugfix: Error passing state of favorite to detail screen
+- Feature: Configure Husky
 
 ## Commit Message Rules
 
