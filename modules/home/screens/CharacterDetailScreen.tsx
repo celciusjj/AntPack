@@ -1,6 +1,7 @@
 import { showFavoriteIcon } from '@/utils/showFavoriteIcon';
 import { useNavigation } from 'expo-router';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useCharacterContext } from '../provider/CharacterProvider';
 
@@ -9,14 +10,12 @@ export const CharacterDetailScreen = () => {
     character: { name, image, gender, species, status, isFavorite },
   } = useCharacterContext();
 
-  console.log(isFavorite);
-
   const { goBack } = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
-        <Image source={{ uri: image }} style={styles.image} />
+        <Animated.Image source={{ uri: image }} style={styles.image} sharedTransitionTag="tag" />
 
         <Text style={styles.name}>
           {name} {showFavoriteIcon(isFavorite)}
