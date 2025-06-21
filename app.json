@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/icon-logo.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.celcius.AntPack"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +38,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "f6f009ac-4512-4e0d-abe0-35ae2be676ca"
+      }
     }
   }
 }
