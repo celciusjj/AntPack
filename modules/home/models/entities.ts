@@ -9,4 +9,5 @@ export interface Character {
   gender: CharacterGender;
   image: string;
   isFavorite?: boolean;
+  createdAt?: string;
 }

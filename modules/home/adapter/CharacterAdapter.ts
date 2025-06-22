@@ -1,4 +1,5 @@
 import { getData, Keys } from '@/store';
+import { formatDate } from '@/utils/formatDate';
 import { Character, CharacterDTO } from '../models';
 
 export const characterAdapter = async (response: CharacterDTO[]) => {
@@ -13,6 +14,7 @@ export const characterAdapter = async (response: CharacterDTO[]) => {
       type: character.type,
       image: character.image,
       isFavorite: favorites.includes(character.id),
+      createdAt: formatDate(character.created),
     };
   });
 
