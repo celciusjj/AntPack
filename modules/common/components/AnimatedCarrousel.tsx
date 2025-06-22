@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, FlatListProps } from 'react-native';
 import Animated, {
   SharedValue,
   useAnimatedScrollHandler,
@@ -7,7 +7,7 @@ import Animated, {
 } from 'react-native-reanimated';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
-interface Props<T> {
+interface Props<T> extends Omit<FlatListProps<T>, 'renderItem'> {
   data: T[];
   itemWidth: number;
   renderCard: (params: {

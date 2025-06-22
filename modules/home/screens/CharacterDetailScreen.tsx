@@ -1,39 +1,38 @@
 import { showFavoriteIcon } from '@/utils/showFavoriteIcon';
 import { useNavigation } from 'expo-router';
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Button } from '../components/Button';
 import { useCharacterDetail } from '../hooks/useCharacterDetail';
 import { useCharacterContext } from '../provider/CharacterProvider';
 
 export const CharacterDetailScreen = () => {
   const {
-    character: { name, image, gender, species, status, isFavorite },
+    character: { name, image, gender, species, status, isFavorite, createdAt },
   } = useCharacterContext();
   const { animatedImageStyle } = useCharacterDetail();
-
   const { goBack } = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <Animated.Image source={{ uri: image }} style={[styles.image, animatedImageStyle]} />
-
-        <Text style={styles.name}>
+        <Text style={styles.title}>
           {name} {showFavoriteIcon(isFavorite)}
         </Text>
-
-        <Text style={styles.label}>
+        <Text style={styles.text}>
           {gender} | {species}
         </Text>
-
-        <Text style={styles.status}>
+        <Text style={styles.text}>
           Estado: <Text style={styles.statusValue}>{status}</Text>
         </Text>
-
-        <TouchableOpacity onPress={goBack} style={styles.button}>
-          <Text style={styles.buttonText}>Volver</Text>
-        </TouchableOpacity>
+        <Text style={styles.text}>
+          Fecha: <Text style={styles.statusValue}>{createdAt}</Text>
+        </Text>
+        <View style={styles.buttonContainer}>
+          <Button handlePress={goBack}>Volver</Button>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -47,6 +46,7 @@ const styles = StyleSheet.create({
   content: {
     padding: 20,
     alignItems: 'center',
+    gap: 8,
   },
   image: {
     width: 250,
@@ -54,21 +54,14 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginBottom: 20,
   },
-  name: {
+  title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#222', // texto oscuro
-    marginBottom: 8,
+    color: '#222',
   },
-  label: {
+  text: {
     fontSize: 16,
     color: '#555',
-    marginBottom: 8,
-  },
-  status: {
-    fontSize: 16,
-    color: '#555',
-    marginBottom: 20,
   },
   statusValue: {
     fontWeight: 'bold',
@@ -79,6 +72,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 20,
   },
+  buttonContainer: {
+    marginTop: 16,
+  },
   locationTitle: {
     color: '#4CAF50',
     fontWeight: 'bold',
@@ -87,18 +83,6 @@ const styles = StyleSheet.create({
   },
   locationText: {
     color: '#333',
-    fontSize: 16,
-  },
-  button: {
-    backgroundColor: '#61dafb',
-    paddingVertical: 10,
-    paddingHorizontal: 30,
-    borderRadius: 8,
-    marginTop: 20,
-  },
-  buttonText: {
-    color: '#000',
-    fontWeight: 'bold',
     fontSize: 16,
   },
 });
