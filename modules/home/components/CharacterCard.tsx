@@ -1,13 +1,18 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Animated, { Extrapolation, interpolate, useAnimatedStyle } from 'react-native-reanimated';
+import Animated, {
+  Extrapolation,
+  interpolate,
+  SharedValue,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import { Character } from '../models';
 import { CharacterCardFooter } from './CharacterCardFooter';
 
 type Props = {
   character: Character;
   index: number;
-  scrollX: Animated.SharedValue<number>;
+  scrollX: SharedValue<number>;
   itemWidth: number;
 };
 
@@ -30,12 +35,25 @@ export const CharacterCard = ({ character, index, scrollX, itemWidth }: Props) =
     };
   }, [scrollX]);
 
+  const footerAnimatedStyle = useAnimatedStyle(() => {
+    const currentOffset = scrollX.value;
+    const itemCenter = index * TOTAL_ITEM_WIDTH;
+    const isCentered = Math.abs(currentOffset - itemCenter) < 10;
+
+    return {
+      opacity: isCentered ? 1 : 0,
+      transform: [{ scale: isCentered ? 1 : 0.95 }],
+    };
+  }, [scrollX]);
+
   return (
     <View style={[styles.card, { width: itemWidth }]}>
       <Animated.View style={[styles.imageWrapper, animatedStyle]}>
         <Animated.Image source={{ uri: character.image }} style={styles.image} resizeMode="cover" />
       </Animated.View>
-      <CharacterCardFooter character={character} />
+      <Animated.View style={footerAnimatedStyle}>
+        <CharacterCardFooter character={character} />
+      </Animated.View>
     </View>
   );
 };

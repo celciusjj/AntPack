@@ -34,8 +34,7 @@ npx expo start
 ## 📱 Run on Android (APK)
 
 Download the APK following the next link:
-➡️ [Download APK]
-https://expo.dev/accounts/celcius/projects/AntPack/builds/68d01301-f1df-49a4-8ee0-1d314946b547
+➡️ [Download APK](https://expo.dev/accounts/celcius/projects/AntPack/builds/8dc7a940-8fe4-42ad-95be-5cfbc8fc8790)
 
 Or, if you want to generate a sharable APK (without publishing to the Play Store), run the following command:
 
@@ -67,6 +66,7 @@ eas build --platform ios --profile preview
 - Smooth animation when the screen changes.
 - Context for state managment, passing the data trought the screens.
 - Project configured for deploy to multiple platforms.
+- Tested on android and ios.
 
 ## 📂 Project Structure And Architecture
 
@@ -104,7 +104,7 @@ AntPack/
 ## TODO (The time was over):
 
 - Feature: Implement infinite scroll
-- Bugfix: Error passing state of favorite to detail screen
+- Feature: Thematization for darkmode.
 - Feature: Configure Husky
 
 ## Commit Message Rules
